@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/clickerFragment">
+
+    <fragment
+        android:id="@+id/clickerFragment"
+        android:name="com.example.clicker.ClickerFragment"
+        android:label="fragment_clicker"
+        tools:layout="@layout/fragment_clicker" />
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.example.clicker.StoreFragment"
+        android:label="fragment_store"
+        tools:layout="@layout/fragment_store" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.example.clicker.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
+</navigation>

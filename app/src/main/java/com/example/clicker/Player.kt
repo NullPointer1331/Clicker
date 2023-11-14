@@ -3,7 +3,7 @@ package com.example.clicker
 import androidx.room.*
 
 @Entity
-data class Player(@PrimaryKey var Id: Int,
+data class Player(@PrimaryKey var Id: Int = 1,
                   var points: Double = 0.0,
                   var basePointsPerClick: Double = 1.0,
                   var pointsPerClickMult: Double = 1.0,

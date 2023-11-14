@@ -7,27 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.example.clicker.databinding.FragmentClickerBinding
 
 class ClickerFragment : Fragment() {
+    private var _binding: FragmentClickerBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_clicker, container, false)
-        val button = view.findViewById<Button>(R.id.button)
-        val player = Player(0)
-        player.basePointsPerSecond = 1.0
-        val pointsDisplay = view.findViewById<TextView>(R.id.pointsView)
-        button.setOnClickListener {
+        _binding = FragmentClickerBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val player = Player()
+
+        binding.button.setOnClickListener {
             player.points += player.getPointsPerClick()
-            pointsDisplay.text = "Points: ${player.points}"
+            binding.pointsView.text = "Points: ${player.points}"
         }
 
-        val perClick = view.findViewById<TextView>(R.id.perClickView)
-        perClick.text = "Points Per Click: ${player.getPointsPerClick()}"
-        val perSecond = view.findViewById<TextView>(R.id.perSecondView)
-        perSecond.text = "Points Per Second: ${player.getPointsPerSecond()}"
+        binding.perClickView.text = "Points Per Click: ${player.getPointsPerClick()}"
+        binding.perSecondView.text = "Points Per Second: ${player.getPointsPerSecond()}"
         // Inflate the layout for this fragment
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

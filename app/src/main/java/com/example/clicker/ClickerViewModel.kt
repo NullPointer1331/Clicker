@@ -1,13 +1,13 @@
 package com.example.clicker
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class ClickerViewModel : ViewModel() {
+class ClickerViewModel(/*val playerDao: PlayerDao, val shopItemDao: ShopItemDao*/) : ViewModel() {
     var player: Player
-    private lateinit var shopItems: List<ShopItem>
-    private lateinit var shopItemDao: ShopItemDao
-    private lateinit var playerDao: PlayerDao
-    private lateinit var appDatabase: AppDatabase
+    val points: MutableLiveData<Double>
 
     init {
         /*
@@ -18,13 +18,25 @@ class ClickerViewModel : ViewModel() {
         player = playerDao.getPlayer(1)
         player.setStats()*/
         player = Player()
+        /*
+        viewModelScope.launch {
+            val existingPlayer = playerDao.getPlayer(1)
+            if (existingPlayer != null) {
+                player = existingPlayer
+            } else {
+                playerDao.insertPlayer(player)
+            }
+        }*/
+        points = MutableLiveData(player.points)
     }
 
     fun click() {
         player.points += player.getPointsPerClick()
+        points.value = player.points
     }
 
     fun passSecond() {
         player.points += player.getPointsPerSecond()
+        points.value = player.points
     }
 }

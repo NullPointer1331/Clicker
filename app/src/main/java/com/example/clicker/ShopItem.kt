@@ -26,16 +26,16 @@ data class ShopItem(@PrimaryKey val Id: Int,
 
 @Dao interface ShopItemDao {
     @Query("SELECT * FROM shopitem")
-    fun getAll(): List<ShopItem>
+    suspend fun getAll(): List<ShopItem>
     @Query("SELECT * FROM shopitem WHERE Id = :Id")
-    fun getShopItem(Id: Int): ShopItem
+    suspend fun getShopItem(Id: Int): ShopItem
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertShopItem(shopItem: ShopItem)
+    suspend fun insertShopItem(shopItem: ShopItem)
 
     @Update
-    fun updateShopItem(shopItem: ShopItem)
+    suspend fun updateShopItem(shopItem: ShopItem)
 
     @Delete
-    fun deleteShopItem(shopItem: ShopItem)
+    suspend fun deleteShopItem(shopItem: ShopItem)
 }

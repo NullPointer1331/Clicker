@@ -9,6 +9,7 @@ data class Player(@PrimaryKey var Id: Int = 1,
                   var pointsPerClickMult: Double = 1.0,
                   var basePointsPerSecond: Double = 0.0,
                   var pointsPerSecondMult: Double = 1.0,
+                  @Ignore
                   var items: MutableList<ShopItem> = mutableListOf<ShopItem>()) {
 
     fun setStats() {
@@ -40,14 +41,14 @@ data class Player(@PrimaryKey var Id: Int = 1,
 
 @Dao interface PlayerDao {
     @Query("SELECT * FROM player WHERE Id = :Id")
-    fun getPlayer(Id: Int): Player
+    suspend fun getPlayer(Id: Int): Player?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlayer(player: Player)
+    suspend fun insertPlayer(player: Player)
 
     @Update
-    fun updatePlayer(player: Player)
+    suspend fun updatePlayer(player: Player)
 
     @Delete
-    fun deletePlayer(player: Player)
+    suspend fun deletePlayer(player: Player)
 }

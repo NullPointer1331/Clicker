@@ -20,13 +20,22 @@ class ClickerFragment : Fragment() {
     ): View? {
         _binding = FragmentClickerBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        /*
+        val application = requireNotNull(this.activity).application
+        val playerDao = ClickerDatabase.getInstance(application).playerDao
+        val shopItemDao = ClickerDatabase.getInstance(application).shopItemDao
+        val viewModelFactory = ClickerViewModelFactory(playerDao, shopItemDao)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ClickerViewModel::class.java]
+         */
         viewModel = ViewModelProvider(this)[ClickerViewModel::class.java]
-        val player = Player()
 
         binding.button.setOnClickListener {
             viewModel.click()
-            binding.pointsView.text = "Points: ${viewModel.player.points}"
         }
+        viewModel.points.observe(viewLifecycleOwner, {
+            binding.pointsView.text = "Points: $it"
+        })
 
         binding.perClickView.text = "Points Per Click: ${viewModel.player.getPointsPerClick()}"
         binding.perSecondView.text = "Points Per Second: ${viewModel.player.getPointsPerSecond()}"

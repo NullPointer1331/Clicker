@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 class ClickerViewModelFactory(private val playerDao: PlayerDao, private val shopItemDao: ShopItemDao) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ClickerViewModel::class.java)) {
-            return ClickerViewModel(/*playerDao, shopItemDao*/) as T
+            return ClickerViewModel(playerDao, shopItemDao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel")
     }

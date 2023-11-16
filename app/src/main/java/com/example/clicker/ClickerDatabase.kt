@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Player::class, ShopItem::class], version = 1, exportSchema = false)
+@Database(entities = arrayOf(Player::class, ShopItem::class), version = 1, exportSchema = false)
 abstract class ClickerDatabase : RoomDatabase() {
     abstract val playerDao: PlayerDao
     abstract val shopItemDao: ShopItemDao
@@ -12,18 +12,16 @@ abstract class ClickerDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ClickerDatabase? = null
         fun getInstance(context: Context): ClickerDatabase {
-            synchronized(this) {
-                var instance = INSTANCE
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        ClickerDatabase::class.java,
-                        "clicker.db"
-                    ).build()
-                    INSTANCE = instance
+            if (INSTANCE == null) {
+                synchronized(this) {
+                    INSTANCE = Room.databaseBuilder(context.applicationContext,
+                        ClickerDatabase::class.java, "clicker.db").build()
                 }
-                return instance
             }
+            return INSTANCE!!
+        }
+        fun destroyInstance() {
+            INSTANCE = null
         }
     }
 }

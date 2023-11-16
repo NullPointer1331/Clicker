@@ -21,14 +21,12 @@ class ClickerFragment : Fragment() {
         _binding = FragmentClickerBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        /*
         val application = requireNotNull(this.activity).application
-        val playerDao = ClickerDatabase.getInstance(application).playerDao
-        val shopItemDao = ClickerDatabase.getInstance(application).shopItemDao
+        val database = ClickerDatabase.getInstance(application)
+        val playerDao = database.playerDao
+        val shopItemDao = database.shopItemDao
         val viewModelFactory = ClickerViewModelFactory(playerDao, shopItemDao)
         viewModel = ViewModelProvider(this, viewModelFactory)[ClickerViewModel::class.java]
-         */
-        viewModel = ViewModelProvider(this)[ClickerViewModel::class.java]
 
         binding.button.setOnClickListener {
             viewModel.click()

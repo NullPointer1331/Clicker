@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
+    kotlin("kapt") version "1.9.20"
 }
 
 android {
@@ -52,5 +53,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 }

@@ -24,13 +24,7 @@ data class Player(@PrimaryKey var Id: Int = 1,
             pointsPerSecondMult += item.pointsPerSecondMult * item.level
         }
     }
-    fun buyItem(item: ShopItem) {
-        if (points >= item.cost) {
-            points -= item.cost
-            item.level++
-            setStats()
-        }
-    }
+
     fun getPointsPerClick(): Double {
         return basePointsPerClick * pointsPerClickMult
     }

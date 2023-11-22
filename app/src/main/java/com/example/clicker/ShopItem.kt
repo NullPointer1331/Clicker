@@ -22,6 +22,10 @@ data class ShopItem(@PrimaryKey val Id: Int,
         }
         return effects
     }
+
+    fun getFullCost(): Double {
+        return cost * Math.pow(1.15, level.toDouble())
+    }
 }
 
 @Dao interface ShopItemDao {

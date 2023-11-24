@@ -15,7 +15,7 @@ class ClickerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentClickerBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -29,9 +29,9 @@ class ClickerFragment : Fragment() {
         binding.button.setOnClickListener {
             viewModel.click()
         }
-        viewModel.points.observe(viewLifecycleOwner, {
+        viewModel.points.observe(viewLifecycleOwner) {
             binding.pointsView.text = "Points: $it"
-        })
+        }
 
         binding.perClickView.text = "Points Per Click: ${viewModel.player.getPointsPerClick()}"
         binding.perSecondView.text = "Points Per Second: ${viewModel.player.getPointsPerSecond()}"

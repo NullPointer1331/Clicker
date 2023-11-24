@@ -15,7 +15,7 @@ class StoreFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentStoreBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -26,9 +26,18 @@ class StoreFragment : Fragment() {
         val viewModelFactory = ClickerViewModelFactory(playerDao, shopItemDao)
         viewModel = ViewModelProvider(this.requireActivity(), viewModelFactory)[ClickerViewModel::class.java]
 
-        viewModel.points.observe(viewLifecycleOwner, {
+        viewModel.points.observe(viewLifecycleOwner) {
             binding.pointsView.text = "Points: $it"
-        })
+        }
+
+        val adapter = ShopItemAdapter()
+        binding.itemList.adapter = adapter
+
+        viewModel.player.items.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.data = it
+            }
+        }
         // Inflate the layout for this fragment
         return view
     }

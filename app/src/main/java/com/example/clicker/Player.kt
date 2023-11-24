@@ -1,5 +1,6 @@
 package com.example.clicker
 
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Entity
@@ -10,14 +11,14 @@ data class Player(@PrimaryKey var Id: Int = 1,
                   var basePointsPerSecond: Double = 0.0,
                   var pointsPerSecondMult: Double = 1.0,
                   @Ignore
-                  var items: MutableList<ShopItem> = mutableListOf<ShopItem>()) {
+                  var items: MutableLiveData<MutableList<ShopItem>> = MutableLiveData(mutableListOf<ShopItem>())) {
 
     fun setStats() {
         basePointsPerClick = 1.0
         pointsPerClickMult = 1.0
         basePointsPerSecond = 0.0
         pointsPerSecondMult = 1.0
-        for (item in items) {
+        for (item in items.value!!) {
             basePointsPerClick += item.pointsPerClick * item.level
             pointsPerClickMult += item.pointsPerClickMult * item.level
             basePointsPerSecond += item.pointsPerSecond * item.level

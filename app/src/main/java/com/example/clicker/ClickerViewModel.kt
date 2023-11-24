@@ -49,6 +49,9 @@ class ClickerViewModel(val playerDao: PlayerDao, val shopItemDao: ShopItemDao) :
     fun passSecond() {
         player.points += player.getPointsPerSecond()
         points.value = player.points
+        viewModelScope.launch {
+            playerDao.updatePlayer(player)
+        }
     }
 
     fun buyItem(item: ShopItem) {

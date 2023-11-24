@@ -11,7 +11,7 @@ import com.example.clicker.databinding.FragmentStoreBinding
 class StoreFragment : Fragment() {
     private var _binding: FragmentStoreBinding? = null
     private val binding get() = _binding!!
-    lateinit var viewModel: ClickerViewModel
+    private lateinit var viewModel: ClickerViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,7 +24,7 @@ class StoreFragment : Fragment() {
         val playerDao = database.playerDao
         val shopItemDao = database.shopItemDao
         val viewModelFactory = ClickerViewModelFactory(playerDao, shopItemDao)
-        viewModel = ViewModelProvider(this, viewModelFactory)[ClickerViewModel::class.java]
+        viewModel = ViewModelProvider(this.requireActivity(), viewModelFactory)[ClickerViewModel::class.java]
 
         viewModel.points.observe(viewLifecycleOwner, {
             binding.pointsView.text = "Points: $it"

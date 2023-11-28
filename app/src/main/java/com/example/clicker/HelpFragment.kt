@@ -21,12 +21,7 @@ class HelpFragment : Fragment() {
         _binding = FragmentHelpBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val application = requireNotNull(this.activity).application
-        val database = ClickerDatabase.getInstance(application)
-        val playerDao = database.playerDao
-        val shopItemDao = database.shopItemDao
-        val viewModelFactory = ClickerViewModelFactory(playerDao, shopItemDao)
-        viewModel = ViewModelProvider(this.requireActivity(), viewModelFactory)[ClickerViewModel::class.java]
+        viewModel = ViewModelProvider(this.requireActivity())[ClickerViewModel::class.java]
 
         binding.resetButton.setOnClickListener {
             viewModel.reset()

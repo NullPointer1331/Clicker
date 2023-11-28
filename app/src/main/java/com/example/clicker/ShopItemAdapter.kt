@@ -29,6 +29,7 @@ class ShopItemAdapter(val viewModel: ClickerViewModel) : RecyclerView.Adapter<Sh
         val itemEffects = rootView.findViewById<TextView>(R.id.item_effects)
         val itemLevel = rootView.findViewById<TextView>(R.id.item_level)
         val itemButton = rootView.findViewById<Button>(R.id.buy_item)
+        val maxButton = rootView.findViewById<Button>(R.id.buy_max)
 
         companion object {
             fun inflateFrom(parent: ViewGroup, viewModel: ClickerViewModel): ShopItemViewHolder {
@@ -39,17 +40,21 @@ class ShopItemAdapter(val viewModel: ClickerViewModel) : RecyclerView.Adapter<Sh
         }
 
         fun bind(shopItem: ShopItem) {
+            setText(shopItem)
+            itemButton.setOnClickListener {
+                viewModel.buyItem(shopItem)
+                setText(shopItem)
+            }
+            maxButton.setOnClickListener {
+                viewModel.buyMax(shopItem)
+                setText(shopItem)
+            }
+        }
+        private fun setText(shopItem: ShopItem) {
             itemName.text = shopItem.name
             itemCost.text = "Cost: ${shopItem.getFullCost()}"
             itemEffects.text = shopItem.getEffects()
             itemLevel.text = "Level: ${shopItem.level}"
-            itemButton.setOnClickListener {
-                viewModel.buyItem(shopItem)
-                itemName.text = shopItem.name
-                itemCost.text = "Cost: ${shopItem.getFullCost()}"
-                itemEffects.text = shopItem.getEffects()
-                itemLevel.text = "Level: ${shopItem.level}"
-            }
         }
     }
 }

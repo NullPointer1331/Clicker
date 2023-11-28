@@ -42,11 +42,28 @@
             android:text="TextView"
             android:textSize="15sp" />
 
-        <Button
-            android:id="@+id/buy_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buy" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            style="?android:attr/buttonBarStyle">
+
+            <Button
+                android:id="@+id/buy_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy"
+                style="?android:attr/buttonBarButtonStyle"/>
+
+            <Button
+                android:id="@+id/buy_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy Max"
+                style="?android:attr/buttonBarButtonStyle"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

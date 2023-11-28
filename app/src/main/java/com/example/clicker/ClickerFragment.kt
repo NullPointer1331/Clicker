@@ -27,9 +27,12 @@ class ClickerFragment : Fragment() {
         viewModel.points.observe(viewLifecycleOwner) {
             binding.pointsView.text = "Points: $it"
         }
-
-        binding.perClickView.text = "Points Per Click: ${viewModel.player.getPointsPerClick()}"
-        binding.perSecondView.text = "Points Per Second: ${viewModel.player.getPointsPerSecond()}"
+        viewModel.perClick.observe(viewLifecycleOwner) {
+            binding.perClickView.text = "Points Per Click: $it"
+        }
+        viewModel.perSecond.observe(viewLifecycleOwner) {
+            binding.perSecondView.text = "Points Per Second: $it"
+        }
         // Inflate the layout for this fragment
         return view
     }

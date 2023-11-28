@@ -5,6 +5,7 @@ Currently, to "play" it, you'll need to open the project in android studio.
 
 ## Android Features Used
 - Fragments
+- Navigation
 - ViewBinding
 - ViewModels
 - Recycler Views

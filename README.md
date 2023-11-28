@@ -4,12 +4,12 @@ For those that don't know what a clicker game is, [this](https://orteil.dashnet.
 Currently, to "play" it, you'll need to open the project in android studio.
 
 ## Android Features Used
-Fragments
-ViewBinding
-ViewModels
-Recycler Views
-Tool Bar
-Live Data
-SQLite
-Room Persistence
-Room Database
+- Fragments
+- ViewBinding
+- ViewModels
+- Recycler Views
+- Tool Bar
+- Live Data
+- SQLite
+- Room Persistence
+- Room Database

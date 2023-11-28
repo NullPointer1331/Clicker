@@ -24,19 +24,37 @@ class ClickerViewModel(val playerDao: PlayerDao, val shopItemDao: ShopItemDao) :
 
             val existingItems = shopItemDao.getAll()
             if (existingItems.isNullOrEmpty()) {
-                player.items.value!!.add(ShopItem(1, "Better Mouse", 10.0, 0.0, 1.0))
-                player.items.value!!.add(ShopItem(2, "Automation", 100.0, 1.0))
-                player.items.value!!.add(ShopItem(2, "Super Click", 500.0, 0.0, 5.0))
-                player.items.value!!.add(ShopItem(3, "Better Automation", 1000.0, 5.0, 0.0))
-                player.items.value!!.add(ShopItem(4, "Ultra Click", 5000.0, 0.0, 3.0, 0.0, 0.1))
-                player.items.value!!.add(ShopItem(5, "Ultra Automation", 10000.0, 3.0, 0.0, 0.1))
-                for (item in player.items.value!!) {
-                    shopItemDao.insertShopItem(item)
-                }
+                setItems()
             } else {
                 player.items.value = existingItems.toMutableList()
             }
             player.setStats()
+        }
+    }
+
+    fun reset() {
+        player = Player()
+        points.value = player.points
+        viewModelScope.launch {
+            playerDao.updatePlayer(player)
+            setItems()
+        }
+    }
+    private fun setItems() {
+        player.items.value = mutableListOf(
+        ShopItem(1, "Better Mouse", 10.0, 0.0, 1.0),
+        ShopItem(2, "Automation", 100.0, 1.0),
+        ShopItem(2, "Super Click", 500.0, 0.0, 5.0),
+        ShopItem(3, "Better Automation", 1000.0, 5.0, 0.0),
+        ShopItem(4, "Ultra Click", 5000.0, 0.0, 3.0, 0.0, 0.1),
+        ShopItem(5, "Ultra Automation", 10000.0, 3.0, 0.0, 0.1))
+        viewModelScope.launch {
+            for (item in shopItemDao.getAll()) {
+                shopItemDao.deleteShopItem(item)
+            }
+            for (item in player.items.value!!) {
+                shopItemDao.insertShopItem(item)
+            }
         }
     }
 

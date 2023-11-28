@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,6 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
-        android:text="This is a fairly barebones clicker game. You gain points by clicking on the big button on the home screen, and you spend those points on the shop screen. There you can buy upgrades that will get you more points. The store is scrollable, so you can click and drag to see more items."
+        android:text="This is a fairly barebones clicker game. You gain points by clicking on the big button on the home screen, and you spend those points on the shop screen. There you can buy upgrades that will get you more points. The store is scrollable, so you can click and drag to see more items. If you want to reset your progress for whatever reason, you can just click the reset button."
         android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:textSize="24sp" />
 </LinearLayout>

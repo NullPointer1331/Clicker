@@ -9,7 +9,9 @@ Currently, to "play" it, you'll need to open the project in android studio.
 - ViewModels
 - Recycler Views
 - Tool Bar
+- Event Handling
 - Live Data
+- Async Tasks
 - SQLite
 - Room Persistence
 - Room Database

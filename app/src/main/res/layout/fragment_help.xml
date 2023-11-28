@@ -21,6 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
-        android:text="Lorem Ipsum..."
+        android:text="This is a fairly barebones clicker game. You gain points by clicking on the big button on the home screen, and you spend those points on the shop screen. There you can buy upgrades that will get you more points. The store is scrollable, so you can click and drag to see more items."
         android:textSize="20sp" />
 </LinearLayout>

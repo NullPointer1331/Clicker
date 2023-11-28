@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 class ClickerViewModel(val playerDao: PlayerDao, val shopItemDao: ShopItemDao) : ViewModel() {
     var player: Player
@@ -24,7 +25,8 @@ class ClickerViewModel(val playerDao: PlayerDao, val shopItemDao: ShopItemDao) :
             val existingItems = shopItemDao.getAll()
             if (existingItems.isNullOrEmpty()) {
                 player.items.value!!.add(ShopItem(1, "Better Mouse", 10.0, 0.0, 1.0))
-                player.items.value!!.add(ShopItem(2, "Automation", 100.0, 1.0, 0.0))
+                player.items.value!!.add(ShopItem(2, "Automation", 100.0, 1.0))
+                player.items.value!!.add(ShopItem(2, "Super Click", 500.0, 0.0, 5.0))
                 player.items.value!!.add(ShopItem(3, "Better Automation", 1000.0, 5.0, 0.0))
                 player.items.value!!.add(ShopItem(4, "Ultra Click", 5000.0, 0.0, 3.0, 0.0, 0.1))
                 player.items.value!!.add(ShopItem(5, "Ultra Automation", 10000.0, 3.0, 0.0, 0.1))
@@ -40,6 +42,7 @@ class ClickerViewModel(val playerDao: PlayerDao, val shopItemDao: ShopItemDao) :
 
     fun click() {
         player.points += player.getPointsPerClick()
+        player.points = (player.points * 100.0).roundToInt() / 100.0
         points.value = player.points
         viewModelScope.launch {
             playerDao.updatePlayer(player)
@@ -48,6 +51,7 @@ class ClickerViewModel(val playerDao: PlayerDao, val shopItemDao: ShopItemDao) :
 
     fun passSecond() {
         player.points += player.getPointsPerSecond()
+        player.points = (player.points * 100.0).roundToInt() / 100.0
         points.value = player.points
         viewModelScope.launch {
             playerDao.updatePlayer(player)
@@ -57,6 +61,7 @@ class ClickerViewModel(val playerDao: PlayerDao, val shopItemDao: ShopItemDao) :
     fun buyItem(item: ShopItem) {
         if (player.points >= item.getFullCost()) {
             player.points -= item.getFullCost()
+            player.points = (player.points * 100.0).roundToInt() / 100.0
             points.value = player.points
             item.level++
             player.setStats()

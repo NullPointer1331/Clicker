@@ -1,5 +1,7 @@
 package com.example.clicker
 import androidx.room.*
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
 @Entity
 data class ShopItem(@PrimaryKey val Id: Int,
@@ -24,7 +26,7 @@ data class ShopItem(@PrimaryKey val Id: Int,
     }
 
     fun getFullCost(): Double {
-        return cost * Math.pow(1.15, level.toDouble())
+        return ((cost * 1.3.pow(level.toDouble())) * 100.0).roundToInt() / 100.0
     }
 }
 

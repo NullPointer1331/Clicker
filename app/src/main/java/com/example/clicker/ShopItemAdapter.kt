@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class ShopItemAdapter : RecyclerView.Adapter<ShopItemAdapter.ShopItemViewHolder>() {
+class ShopItemAdapter(val viewModel: ClickerViewModel) : RecyclerView.Adapter<ShopItemAdapter.ShopItemViewHolder>() {
     var data = listOf<ShopItem>()
         set(value) {
             field = value
@@ -15,7 +15,7 @@ class ShopItemAdapter : RecyclerView.Adapter<ShopItemAdapter.ShopItemViewHolder>
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-    : ShopItemViewHolder = ShopItemViewHolder.inflateFrom(parent)
+    : ShopItemViewHolder = ShopItemViewHolder.inflateFrom(parent, viewModel)
     override fun onBindViewHolder(holder: ShopItemViewHolder, position: Int) {
         val item = data[position]
         holder.bind(item)
@@ -23,17 +23,18 @@ class ShopItemAdapter : RecyclerView.Adapter<ShopItemAdapter.ShopItemViewHolder>
 
     override fun getItemCount() = data.size
 
-    class ShopItemViewHolder(rootView: CardView) : RecyclerView.ViewHolder(rootView) {
+    class ShopItemViewHolder(rootView: CardView, val viewModel: ClickerViewModel) : RecyclerView.ViewHolder(rootView) {
         val itemName = rootView.findViewById<TextView>(R.id.item_name)
         val itemCost = rootView.findViewById<TextView>(R.id.item_cost)
         val itemEffects = rootView.findViewById<TextView>(R.id.item_effects)
         val itemLevel = rootView.findViewById<TextView>(R.id.item_level)
         val itemButton = rootView.findViewById<Button>(R.id.buy_item)
+
         companion object {
-            fun inflateFrom(parent: ViewGroup): ShopItemViewHolder {
+            fun inflateFrom(parent: ViewGroup, viewModel: ClickerViewModel): ShopItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val view = layoutInflater.inflate(R.layout.shop_item, parent, false) as CardView
-                return ShopItemViewHolder(view)
+                return ShopItemViewHolder(view, viewModel)
             }
         }
 
@@ -43,7 +44,11 @@ class ShopItemAdapter : RecyclerView.Adapter<ShopItemAdapter.ShopItemViewHolder>
             itemEffects.text = shopItem.getEffects()
             itemLevel.text = "Level: ${shopItem.level}"
             itemButton.setOnClickListener {
-                shopItem.level++
+                viewModel.buyItem(shopItem)
+                itemName.text = shopItem.name
+                itemCost.text = "Cost: ${shopItem.getFullCost()}"
+                itemEffects.text = shopItem.getEffects()
+                itemLevel.text = "Level: ${shopItem.level}"
             }
         }
     }

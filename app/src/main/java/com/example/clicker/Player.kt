@@ -2,6 +2,7 @@ package com.example.clicker
 
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
+import kotlin.math.roundToInt
 
 @Entity
 data class Player(@PrimaryKey var Id: Int = 1,
@@ -27,10 +28,10 @@ data class Player(@PrimaryKey var Id: Int = 1,
     }
 
     fun getPointsPerClick(): Double {
-        return basePointsPerClick * pointsPerClickMult
+        return ((basePointsPerClick * pointsPerClickMult) * 100.0).roundToInt() / 100.0
     }
     fun getPointsPerSecond(): Double {
-        return basePointsPerSecond * pointsPerSecondMult
+        return ((basePointsPerSecond * pointsPerSecondMult) * 100.0).roundToInt() / 100.0
     }
 }
 

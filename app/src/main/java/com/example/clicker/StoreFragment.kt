@@ -30,7 +30,7 @@ class StoreFragment : Fragment() {
             binding.pointsView.text = "Points: $it"
         }
 
-        val adapter = ShopItemAdapter()
+        val adapter = ShopItemAdapter(viewModel)
         binding.itemList.adapter = adapter
 
         viewModel.player.items.observe(viewLifecycleOwner) {

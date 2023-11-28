@@ -18,25 +18,29 @@
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/item_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item_effects"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/buy_item"
